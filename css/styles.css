@@ -7,8 +7,12 @@ h1 {
 
 h2 {
     text-align:center;
-    font-size: 60px;
+    font-size: 50px;
     margin: 0 auto;
+}
+
+body {
+    font-family: sans-serif;
 }
 
 div {
@@ -17,10 +21,35 @@ div {
     padding-top: 15px;
 }
 
-#slope {
+.sliders {
+    margin: 0px auto;
+    width: 450px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 150px;
+    height: 10px;
+    outline: none;
+    opacity: 0.7;
+    border-radius: 12px;
+}
+
+#slope, #m {
     color: rgb(38, 193, 175);
 }
 
-#y-intercept {
+#y-intercept, #b {
     color: rgb(228, 107, 70);
 }
+
+#slope-slider {
+    float: left;    
+    background: rgb(38, 193, 175);
+}
+
+#y-intercept-slider {
+    float: right;
+    background: rgb(228, 107, 70);
+}
+
