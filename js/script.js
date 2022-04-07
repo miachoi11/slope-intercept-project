@@ -11,18 +11,14 @@ let b = 0;
 let length = 500;
 
 // number of units on axes
-let numUnits = 20;
+let numUnits = 10;
 
 // spacing
 let spacing = length / numUnits;
 
-function drawGraph() {
-    let ctx = graph.getContext("2d");
-    drawGridlines(ctx, spacing);
-}
-
-function drawGridlines(ctx, spacing) {
-    ctx.strokeStyle = "rgb(0,0,0)";
+function drawGridlines() {
+    let ctx = graph.getContext("2d")
+    ctx.strokeStyle = "rgb(230,215,245)";
     ctx.lineWidth = 1;
     ctx.beginPath();
 
@@ -39,4 +35,28 @@ function drawGridlines(ctx, spacing) {
     }
 }
 
-drawGraph();
+function drawAxes() {
+    let ctx = graph.getContext("2d")
+    ctx.strokeStyle = "rgb(40,33,48)";
+    ctx.lineWidth = 3;
+    
+    // x-axis
+    ctx.beginPath();
+    ctx.moveTo(0, length/2);
+    ctx.lineTo(length, length/2);
+    ctx.stroke();
+
+    // x tick marks
+
+    // y-axis
+    ctx.beginPath();
+    ctx.moveTo(length/2, 0);
+    ctx.lineTo(length/2, length);
+    ctx.stroke();
+
+    // y tick marks
+
+}
+
+drawGridlines();
+drawAxes();

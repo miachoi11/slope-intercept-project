@@ -14,4 +14,13 @@ h2 {
 div {
     margin: 0 auto;
     text-align: center;
+    padding-top: 15px;
+}
+
+#slope {
+    color: rgb(38, 193, 175);
+}
+
+#y-intercept {
+    color: rgb(228, 107, 70);
 }
