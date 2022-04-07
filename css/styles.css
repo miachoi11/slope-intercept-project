@@ -10,3 +10,8 @@ h2 {
     font-size: 60px;
     margin: 0 auto;
 }
+
+div {
+    margin: 0 auto;
+    text-align: center;
+}
