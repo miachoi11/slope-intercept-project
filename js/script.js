@@ -31,7 +31,7 @@ function drawGraph() {
 
 // draws the gridlines
 function drawGridlines(ctx) {
-    ctx.strokeStyle = "rgb(230,215,245)";
+    ctx.strokeStyle = "rgb(226, 226, 228)";
     ctx.lineWidth = 1;
     ctx.beginPath();
 
@@ -76,15 +76,20 @@ function drawAxes(ctx) {
     ctx.stroke();
 }
 
+// draws the line
 function drawLine() {
     let ctx = graph.getContext("2d");
     let edgeCoordinates = getEdgeCoordinates();
     ctx.beginPath();
+    ctx.strokeStyle = "rgb(0,53,84)";
+    ctx.lineWidth = 3;
     ctx.moveTo(edgeCoordinates.x1, edgeCoordinates.y1);
     ctx.lineTo(edgeCoordinates.x2, edgeCoordinates.y2);
     ctx.stroke();
 }
 
+
+// calculates the edge points of the line
 function getEdgeCoordinates() {
     let y1 = (-1 * slopeVal * (length / 2)) - (yVal * spacing);
     let y2 = (slopeVal * (length / 2)) - (yVal * spacing);
@@ -109,7 +114,9 @@ function updateGraph() {
 }
 
 drawGraph();
-// updates slope and y-intercept values
+drawLine();
+
+// updates the line as the sliders are changed
 slopeSlider.oninput = function() {
     slope.innerHTML = this.value;
     slopeVal = this.value;
