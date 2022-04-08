@@ -35,6 +35,12 @@ div {
     border-radius: 12px;
 }
 
+.slider-labels {
+    margin: 0px auto;
+    width: 450px;
+    font-weight: bold;
+}
+
 #slope, #m {
     color: rgb(38, 193, 175);
 }
@@ -53,3 +59,11 @@ div {
     background: rgb(228, 107, 70);
 }
 
+#slope-slider-label {
+   float:left;
+}
+
+#y-intercept-slider-label {
+    padding-right: 50px;
+    float: right;
+}

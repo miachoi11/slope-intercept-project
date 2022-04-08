@@ -1,16 +1,26 @@
 // canvas for graph
 let graph = document.getElementById("graph");
 
-// slope
+// slope (equation)
 let slope = document.getElementById("slope");
 let slopeSlider = document.getElementById("slope-slider");
 slope.innerHTML = slopeSlider.value;
+
+// slope label
+let slopeLabel = document.getElementById("slope-label");
+slopeLabel.innerHTML = slopeSlider.value;
+
 let slopeVal = slopeSlider.value;
 
-// y-intercept
+// y-intercept (equation)
 let yintercept = document.getElementById("y-intercept");
 let yinterceptSlider = document.getElementById("y-intercept-slider");
 yintercept.innerHTML = yinterceptSlider.value;
+
+// y-intercept label
+let yInterceptLabel = document.getElementById("y-intercept-label");
+yInterceptLabel.innerHTML = yinterceptSlider.value;
+
 let yVal = yinterceptSlider.value;
 
 // side length of square canvas
@@ -88,11 +98,20 @@ function drawLine() {
     ctx.stroke();
 }
 
+// draw the y-intercept point
+function drawYIntPoint() {
+    let ctx = graph.getContext("2d");
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(228, 107, 70)";
+    ctx.arc(length/2, length/2 - (yVal* spacing), 5, 0, 2*Math.PI, false);
+    ctx.fill();
+}
+
 
 // calculates the edge points of the line
 function getEdgeCoordinates() {
-    let y1 = (-1 * slopeVal * (length / 2)) - (yVal * spacing);
-    let y2 = (slopeVal * (length / 2)) - (yVal * spacing);
+    let y1 = (-1 * slopeVal * (length/2)) - (yVal * spacing);
+    let y2 = (slopeVal * (length/2)) - (yVal * spacing);
     return {
         x1: 0,
         x2: length,
@@ -111,20 +130,25 @@ function updateGraph() {
     clearCanvas();
     drawGraph();
     drawLine();
+    drawYIntPoint();
 }
 
+// initalizes the graph
 drawGraph();
 drawLine();
+drawYIntPoint();
 
-// updates the line as the sliders are changed
+// updates the graph as the sliders are changed
 slopeSlider.oninput = function() {
     slope.innerHTML = this.value;
+    slopeLabel.innerHTML = this.value
     slopeVal = this.value;
     updateGraph();
 }
 
 yinterceptSlider.oninput = function() {
     yintercept.innerHTML = this.value;
+    yInterceptLabel.innerHTML = this.value;
     yVal = this.value;
     updateGraph();
 }
