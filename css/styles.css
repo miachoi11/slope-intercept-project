@@ -41,6 +41,13 @@ div {
     font-weight: bold;
 }
 
+.reset-button {
+    padding-top: 60px;
+    width: 500px;
+    margin: 0px auto;
+    text-align: center;
+}
+
 #slope, #m {
     color: rgb(38, 193, 175);
 }
@@ -60,10 +67,18 @@ div {
 }
 
 #slope-slider-label {
-   float:left;
+   float: left;
 }
 
 #y-intercept-slider-label {
     padding-right: 50px;
     float: right;
 }
+
+#reset-button {
+    font-size: 20px;
+    background-color: rgb(244, 96, 96);
+    border-color: rgb(202, 38, 38);
+    border-radius: 15px;
+}
+

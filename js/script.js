@@ -134,9 +134,7 @@ function updateGraph() {
 }
 
 // initalizes the graph
-drawGraph();
-drawLine();
-drawYIntPoint();
+updateGraph();
 
 // updates the graph as the sliders are changed
 slopeSlider.oninput = function() {
@@ -150,6 +148,19 @@ yinterceptSlider.oninput = function() {
     yintercept.innerHTML = this.value;
     yInterceptLabel.innerHTML = this.value;
     yVal = this.value;
+    updateGraph();
+}
+
+// reset button
+let resetButton = document.getElementById("reset-button");
+
+resetButton.onclick = function() {
+    slopeLabel.innerHTML = 0;
+    slope.innerHTML = 0;
+    slopeVal = 0;
+    yintercept.innerHTML = 0;
+    yInterceptLabel.innerHTML = 0;
+    yVal = 0;
     updateGraph();
 }
 
