@@ -5,11 +5,13 @@ let graph = document.getElementById("graph");
 let slope = document.getElementById("slope");
 let slopeSlider = document.getElementById("slope-slider");
 slope.innerHTML = slopeSlider.value;
+let slopeVal = slopeSlider.value;
 
 // y-intercept
 let yintercept = document.getElementById("y-intercept");
 let yinterceptSlider = document.getElementById("y-intercept-slider");
 yintercept.innerHTML = yinterceptSlider.value;
+let yVal = yinterceptSlider.value;
 
 // side length of square canvas
 let length = 500;
@@ -74,16 +76,53 @@ function drawAxes(ctx) {
     ctx.stroke();
 }
 
+function drawLine() {
+    let ctx = graph.getContext("2d");
+    let edgeCoordinates = getEdgeCoordinates();
+    ctx.beginPath();
+    ctx.moveTo(edgeCoordinates.x1, edgeCoordinates.y1);
+    ctx.lineTo(edgeCoordinates.x2, edgeCoordinates.y2);
+    ctx.stroke();
+}
 
+function getEdgeCoordinates() {
+    let y1 = (-1 * slopeVal * (length / 2)) - (yVal * spacing);
+    let y2 = (slopeVal * (length / 2)) - (yVal * spacing);
+    return {
+        x1: 0,
+        x2: length,
+        y1: y2 + length / 2,
+        y2: y1 + length / 2
+    };
+}
+
+function clearCanvas() {
+    let ctx = graph.getContext("2d");
+    ctx.fillStyle = "rgb(255, 255, 255)";
+    ctx.fillRect(0, 0, length, length);
+}
+
+function updateGraph() {
+    clearCanvas();
+    drawGraph();
+    drawLine();
+}
+
+drawGraph();
 // updates slope and y-intercept values
 slopeSlider.oninput = function() {
     slope.innerHTML = this.value;
+    slopeVal = this.value;
+    updateGraph();
 }
 
 yinterceptSlider.oninput = function() {
     yintercept.innerHTML = this.value;
+    yVal = this.value;
+    updateGraph();
 }
 
 
 
-drawGraph();
+
+
