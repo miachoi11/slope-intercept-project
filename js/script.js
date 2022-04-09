@@ -155,9 +155,11 @@ yinterceptSlider.oninput = function() {
 let resetButton = document.getElementById("reset-button");
 
 resetButton.onclick = function() {
+    slopeSlider.value = 0;
     slopeLabel.innerHTML = 0;
     slope.innerHTML = 0;
     slopeVal = 0;
+    yinterceptSlider.value = 0;
     yintercept.innerHTML = 0;
     yInterceptLabel.innerHTML = 0;
     yVal = 0;
