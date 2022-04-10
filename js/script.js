@@ -73,15 +73,26 @@ function drawAxes(ctx) {
     ctx.moveTo(length/2, 0);
     ctx.lineTo(length/2, length);
 
-    // tick marks
-    for(let i = 0; i <= length; i += spacing) {
-        // x-axis ticks
+    // tick marks and labels for axes
+    for (let i = 0; i <= length; i += spacing) {
+        // x-axis 
         ctx.moveTo(i, length/2 + 3);
         ctx.lineTo(i, length/2 - 3);
+        ctx.fillStyle = "rgb(40,33,48)";
+        ctx.fillText((i/spacing)-5, i+2,length/2 + 11);
+        if (i == 500) {
+            ctx.fillText((i/spacing)-5, i-10,length/2 + 11);
+        }
 
-        // y-axis ticks
+        // y-axis 
         ctx.moveTo(length/2 - 3, i);
         ctx.lineTo(length/2 + 3,i);
+        if (i != length/2) {
+            ctx.fillText(-(i/spacing)+5, length/2 + 3, i-5);
+        } 
+        if (i == 0) {
+            ctx.fillText(-(i/spacing)+5, length/2 + 3, i+10);
+        }
     }
     ctx.stroke();
 }
