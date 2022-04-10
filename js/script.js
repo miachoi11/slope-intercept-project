@@ -88,10 +88,10 @@ function drawAxes(ctx) {
         ctx.moveTo(length/2 - 3, i);
         ctx.lineTo(length/2 + 3,i);
         if (i != length/2) {
-            ctx.fillText(-(i/spacing)+5, length/2 + 3, i-5);
+            ctx.fillText(-(i/spacing)+5, length/2 + 2, i-2);
         } 
         if (i == 0) {
-            ctx.fillText(-(i/spacing)+5, length/2 + 3, i+10);
+            ctx.fillText(-(i/spacing)+5, length/2 + 2, i+10);
         }
     }
     ctx.stroke();
