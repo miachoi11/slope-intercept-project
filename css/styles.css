@@ -21,6 +21,32 @@ div {
     padding-top: 15px;
 }
 
+.Row {
+    display: table;
+    table-layout: fixed;
+    border-spacing: 10px;
+    padding: 0px;
+}
+
+.Col {
+    display: table-cell;
+    vertical-align: top;
+    padding: 0px;
+}
+
+.question-menu {
+    width: 150px;
+    background-color:rgb(233, 211, 203);
+}
+
+.practice-menu {
+    font-weight: bold;
+    padding-top: 10px;
+    width: 150px;
+    background-color:rgb(233, 211, 203);
+}
+
+
 
 .sliders {
     margin: 0px auto;
