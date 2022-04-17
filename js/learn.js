@@ -118,6 +118,14 @@ function drawYIntPoint() {
     ctx.fill();
 }
 
+// draw the x-intercept point
+function drawXIntPoint() {
+    let ctx = graph.getContext("2d");
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(228, 107, 70)";
+    ctx.arc(length/2 + (-yVal * spacing)/slopeVal,length/2,  5, 0, 2*Math.PI, false);
+    ctx.fill();
+}
 
 // calculates the edge points of the line
 function getEdgeCoordinates() {
@@ -142,6 +150,7 @@ function updateGraph() {
     drawGraph();
     drawLine();
     drawYIntPoint();
+    drawXIntPoint();
 }
 
 // initalizes the graph
@@ -180,15 +189,46 @@ resetButton.onclick = function() {
 
 // ----- Learn Text -------
 const dialogue = {
-    0: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    1: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    0: "Hi! ",
+    1: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    2: "hi",
+    3: "pancake",
+    4: "waffle",
+    5: "qt",
+
 }
 
-index = 0;
+let index = 0;
 const learnText = document.getElementById("learn-text");
 learnText.innerHTML = dialogue[0];
+nextButton = document.getElementById("next-button");
+backButton = document.getElementById("back-button");
+finishButton = document.getElementById("finish-button");
+finishButton.style.display = "none";
+backButton.style.display = "none";
+nextButton.onclick = function() {
 
+    index += 1;
+    learnText.innerHTML = dialogue[index];
+    if (index == 5) {
+        nextButton.style.display = "none";
+        finishButton.style.display = "";
+    }
 
+    if (index == 1) {
+        backButton.style.display = "";
+    }
+}
 
-
-
+backButton.onclick = function() {
+    index -= 1;
+    learnText.innerHTML = dialogue[index];
+    if (index == 0) {
+        backButton.style.display = "none";
+    }
+    
+    if (index == 4) {
+        nextButton.style.display = "";
+        finishButton.style.display = "none";
+    }
+}
