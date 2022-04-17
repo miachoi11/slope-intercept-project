@@ -43,7 +43,7 @@ function preload() {
     }
 }
 
-preload("../img/background-dog-hill", "../img/background-dog-cliff", "../img/background-rocket-blob");
+preload("../img/background-dog-hill", "../img/background-dog-cliff", "../img/background-rocket-blob", "../img/white.png");
 
 
 function drawBackground() {
@@ -222,50 +222,78 @@ resetButton.onclick = function() {
 
 // ----- Play -------
 const dialogue = {
-    0: "Welcome back! Perfect timing because a lot of my friends really need your help (and your math skills)! <br><br> This is my friend, Waffle, and he's having trouble going up this hill. <br><br> Can you help Waffle find the slope of this hill? <br><br> <small>Please input your answer as a decimal.</small>",
-    1: "hi",
-    2: "pancake",
-    3: "waffle",
-    4: "qt",
-
+    0: "Welcome back! Perfect timing because a lot of my friends really need your help (and your math skills)! <br><br> This is my friend, Waffle, and he's having trouble going up this hill. <br><br> Can you help Waffle find the slope of this hill? <br><br> <small>If you have a fraction, please input it as a decimal.</small>",
+    1: "Oh no! <br><br> Waffle wants to go meet his friend, Pancake, but they are separated by a cliff! <br><br> Help Waffle by building a bridge across the cliff. <br><br> What is the slope of the line? <br><br> <small>If you have a fraction, please input it as a decimal.</small>",
+    2: "<small> My alien buddy is coming to visit Earth for a vacation. <br><br> His rocket is at (-2, -2) and Earth is at (2, 4). <br><br> The rocket needs to make a pit stop to refuel when it reaches the midway point (the y-axis). <br><br> Can you find the y-coordinate of his pit stop? <br><br> <small>Hint: if you can't see the numbers, use the equation!</small>",
+    3: "Awesome Job! <br><br> Thank you for your help! <br><br>",
 }
-let answers = [0.5, -2, 1];
 let isCorrect = false;
+answerInput = document.getElementById("answer");
 const playText = document.getElementById("play-text");
 playText.innerHTML = dialogue[0];
+checkButton = document.getElementById("check-answer");
 nextButton = document.getElementById("next-button");
 backButton = document.getElementById("back-button");
 finishButton = document.getElementById("finish-button");
 finishButton.style.display = "none";
 backButton.style.display = "none";
 
+// checks the input answer
+function checkAnswer() {
+    let inputValue = answerInput.valueAsNumber;
+    isCorrect = ((index == 0 && inputValue == 0.5) || 
+                 (index == 1 && inputValue == -1) ||
+                 (index == 2 && inputValue == 1)) ? true : false;
+}
+
+checkButton.onclick = function(){
+    checkAnswer();
+    if (isCorrect) {
+        playText.innerHTML = "Correct!";
+        answerInput.style.display = "none";
+        checkButton.style.display ="none";
+        answerInput.value = "";
+        answerInput.placeholder = "";
+    } else {
+        answerInput.value = "";
+        answerInput.placeholder = "Try again!";
+    }
+    answerInput.value = "";
+}
+
 nextButton.onclick = function() {
     index += 1;
     playText.innerHTML = dialogue[index];
+    answerInput.placeholder = "";
+    answerInput.style.display = "";
+    checkButton.style.display ="";
     updateGraph();
     if (index == 1) {
         backButton.style.display = "";
     }
 
-    
-    if (index == 5) {
+    if (index == 3) {
         nextButton.style.display = "none";
         finishButton.style.display = "";
+        answerInput.style.display = "none";
+        checkButton.style.display = "none";
     }
-
-    
 }
 
 backButton.onclick = function() {
     index -= 1;
+    answerInput.style.display = "";
+    answerInput.placeholder = "";
+    checkButton.style.display ="";
     playText.innerHTML = dialogue[index];
     updateGraph();
     if (index == 0) {
         backButton.style.display = "none";
     }
     
-    if (index == 4) {
+    if (index == 2) {
         nextButton.style.display = "";
         finishButton.style.display = "none";
+        answerInput.style.display = "";
     }
 }

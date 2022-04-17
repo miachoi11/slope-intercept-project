@@ -230,6 +230,19 @@ a#play-button:hover {
     background:linear-gradient(to top, rgb(229, 87, 87) 10%, rgb(244, 96, 96) 100%);
 }
 
+#check-answer {
+    border: none;
+    background-color:rgb(92, 173, 223);
+    color: white;
+    height: 23px;
+    width: 60px;
+}
+
+#check-answer:hover {
+    cursor: pointer;
+    background:linear-gradient(to top, rgb(74, 156, 206) 10%, rgb(92, 173, 223) 100%);
+}
+
 #answer {
     -webkit-appearance: none;
 }
