@@ -109,22 +109,30 @@ function drawLine() {
     ctx.stroke();
 }
 
-// draw the y-intercept point
-function drawYIntPoint() {
+// draw the intercept points
+function drawInterceptPoints() {
     let ctx = graph.getContext("2d");
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(168, 147, 236)";
+    ctx.arc(length/2 + (-yVal * spacing)/slopeVal,length/2,  5, 0, 2*Math.PI, false);
+    ctx.fill();
+
     ctx.beginPath();
     ctx.fillStyle = "rgb(228, 107, 70)";
     ctx.arc(length/2, length/2 - (yVal* spacing), 5, 0, 2*Math.PI, false);
     ctx.fill();
 }
 
-// draw the x-intercept point
-function drawXIntPoint() {
-    let ctx = graph.getContext("2d");
-    ctx.beginPath();
-    ctx.fillStyle = "rgb(228, 107, 70)";
-    ctx.arc(length/2 + (-yVal * spacing)/slopeVal,length/2,  5, 0, 2*Math.PI, false);
-    ctx.fill();
+let mouseX = 0;
+let mouseY = 0;
+graph.addEventListener("mousemove", function(event) { 
+    let cRect = graph.getBoundingClientRect();        
+    mouseX = Math.round(event.clientX - cRect.left);  
+    mouseY = Math.round(event.clientY - cRect.top);   
+});
+
+function showCoordinates() {
+    
 }
 
 // calculates the edge points of the line
@@ -149,8 +157,7 @@ function updateGraph() {
     clearCanvas();
     drawGraph();
     drawLine();
-    drawYIntPoint();
-    drawXIntPoint();
+    drawInterceptPoints();
 }
 
 // initalizes the graph
@@ -189,12 +196,19 @@ resetButton.onclick = function() {
 
 // ----- Learn Text -------
 const dialogue = {
-    0: "Hi! ",
-    1: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    2: "hi",
-    3: "pancake",
-    4: "waffle",
-    5: "qt",
+    0: "Hey! <br><br> I'm so excited that you're here! <br><br> Today, I want to teach you all about a super important topic in algebra. <br><br> You guessed it! Slope-Intercept Form. <br><br> When you're ready, press \"Next\" to get started.",
+    1: "First, let's look at how this graph works. <br><br> At the bottom, there are two sliders. One controls slope and the other controls the <br>y-intercept. <br><br> Don't worry if you don't know what those are yet! For now, give those sliders a try and see how the graph changes. <br><br> What patterns do you notice as you change the slope and y-intercept?",
+    2: "Slope-intercept form is a way to write a <b>linear</b> equation. <br><br> Linear equations have two variables: x and y. <br><br> x and y have a linear <em>relationship</em> which means that as one variable changes, the other variable changes by some constant rate. <br><br> Specifically, as we change the value of x, the value of y changes!",
+    3: "A slope-intercept equation is written as <br><b>y = mx + b</b>. <br><br>The variable \"m\" represents the slope, and the \"b\" represents the y-intercept. <br><br> Press \"Next\" to learn more about each part of the equation!",
+    4: "Let's take a closer look at the y-intercept. <br><br> The y-intercept is where our function crosses the y-axis. <br><br> Remember! The y-axis is the vertical axis that goes up and down. <br><br> Do you notice how our orange point goes up when we increase our y-intercept value and down when we decrease it?",
+    5: "Slope-intercept form makes finding the <br>y-intercept super easy! <br><br> At the y-axis, the value of x = 0. <br><br> When we plug in 0 for x, the \"mx\" term will always be 0 since we are multiplying by 0. <br><br> This means that the coordinate of the y-intercept will be (0, b). <br><br> Knowledge check! What would be the <br>y-intercept of the equation y = 3x - 2?",
+    6: "If you said (0, -2), you're correct! <br><br> You're now one step closer to becoming a true slope-intercept master. <br><br> Press \"Next\" to learn about slope!",
+    7: "Remember how we said that in a linear relationship, when one variable changes, the other changes at a constant rate? <br><br> Slope is what represents this <b>rate of change</b>.<br><br> Press \"Next\" to learn more about the slope and how to find it.",
+    8: "Slope tells us about the steepness and direction of a line. <br><br> The greater the absolute value of the slope, the steeper it gets. This is because when the slope is steeper, y changes at a faster rate as x changes. <br><br> A negative slope means that y decreases as x increases. <br><br> Play around with the slope slider and see these changes in action.",
+    9: "We can find slope by dividing the",
+    10: "qt",
+    11: "qt",
+    12: "qt",
 
 }
 
@@ -210,7 +224,7 @@ nextButton.onclick = function() {
 
     index += 1;
     learnText.innerHTML = dialogue[index];
-    if (index == 5) {
+    if (index == 12) {
         nextButton.style.display = "none";
         finishButton.style.display = "";
     }
@@ -227,7 +241,7 @@ backButton.onclick = function() {
         backButton.style.display = "none";
     }
     
-    if (index == 4) {
+    if (index == 11) {
         nextButton.style.display = "";
         finishButton.style.display = "none";
     }

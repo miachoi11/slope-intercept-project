@@ -25,6 +25,7 @@ div {
 .navigation-bar {
     background-color:rgb(200, 203, 210, 0.429);
     padding: 10px;
+    margin-bottom: 0px;
 }
 
 .home-icon {
@@ -66,7 +67,7 @@ div {
     margin-top: 120px;
     padding: 5px;
     width: 400px;
-    height: 300px;
+    height: 350px;
     background-color: rgb(219, 213, 213);
     text-align: center;
 }
@@ -77,10 +78,10 @@ div {
     height: 0px;
     position: relative;
     border-left: 100px solid transparent;
-    border-right: 100px solid rgb(219, 213, 213);
-    border-bottom: 100px solid transparent;
-    right: 150px;
-    bottom: -250px;
+    border-right: 70px solid rgb(219, 213, 213);
+    border-bottom: 70px solid transparent;
+    right: 130px;
+    bottom: -330px;
 }
 
 .sliders {
@@ -104,7 +105,7 @@ div {
 }
 
 .reset-button {
-    padding-top: 60px;
+    padding-top: 55px;
     width: 500px;
     margin: 0px auto;
     text-align: center;
@@ -180,7 +181,7 @@ a#play-button:hover {
     margin-left: 180px;
 }
 
-#learn-text {
+#learn-text, #play-text {
     text-align: left;
     margin-top: 0px;
     padding-left: 10px;
@@ -227,4 +228,13 @@ a#play-button:hover {
 #reset-button:hover {
     cursor: pointer;
     background:linear-gradient(to top, rgb(229, 87, 87) 10%, rgb(244, 96, 96) 100%);
+}
+
+#answer {
+    -webkit-appearance: none;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

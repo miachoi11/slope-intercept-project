@@ -32,6 +32,25 @@ let numUnits = 10;
 // spacing
 let spacing = length / numUnits;
 
+let images = [];
+
+let index = 0;
+
+function preload() {
+    for (let i = 0; i < arguments.length; i++) {
+        images[i] = new Image();
+        images[i].src = preload.arguments[i];
+    }
+}
+
+preload("../img/background-dog-hill", "../img/background-dog-cliff", "../img/background-rocket-blob");
+
+
+function drawBackground() {
+    let ctx = graph.getContext("2d");
+    ctx.drawImage(images[index], 0, 0, length, length);
+}
+
 // draws the gridlines and the axes
 function drawGraph() {
     let ctx = graph.getContext("2d");
@@ -41,7 +60,7 @@ function drawGraph() {
 
 // draws the gridlines
 function drawGridlines(ctx) {
-    ctx.strokeStyle = "rgb(226, 226, 228)";
+    ctx.strokeStyle = "rgba(226, 226, 228, 0.1)";
     ctx.lineWidth = 1;
     ctx.beginPath();
 
@@ -109,24 +128,31 @@ function drawLine() {
     ctx.stroke();
 }
 
-// draw the y-intercept point
-function drawYIntPoint() {
+// draw the intercept points
+function drawInterceptPoints() {
     let ctx = graph.getContext("2d");
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(168, 147, 236)";
+    ctx.arc(length/2 + (-yVal * spacing)/slopeVal,length/2,  5, 0, 2*Math.PI, false);
+    ctx.fill();
+
     ctx.beginPath();
     ctx.fillStyle = "rgb(228, 107, 70)";
     ctx.arc(length/2, length/2 - (yVal* spacing), 5, 0, 2*Math.PI, false);
     ctx.fill();
 }
 
-// draw the x-intercept point
-function drawXIntPoint() {
-    let ctx = graph.getContext("2d");
-    ctx.beginPath();
-    ctx.fillStyle = "rgb(228, 107, 70)";
-    ctx.arc(length/2 + (-yVal * spacing)/slopeVal,length/2,  5, 0, 2*Math.PI, false);
-    ctx.fill();
-}
+let mouseX = 0;
+let mouseY = 0;
+graph.addEventListener("mousemove", function(event) { 
+    let cRect = graph.getBoundingClientRect();        
+    mouseX = Math.round(event.clientX - cRect.left);  
+    mouseY = Math.round(event.clientY - cRect.top);   
+});
 
+function showCoordinates() {
+    
+}
 
 // calculates the edge points of the line
 function getEdgeCoordinates() {
@@ -148,10 +174,16 @@ function clearCanvas() {
 
 function updateGraph() {
     clearCanvas();
+    images[index].onload = function() {
+        drawBackground();
+        drawGraph();
+        drawLine();
+        drawInterceptPoints();
+    }
+    drawBackground();
     drawGraph();
     drawLine();
-    drawYIntPoint();
-    drawXIntPoint();
+    drawInterceptPoints();
 }
 
 // initalizes the graph
@@ -188,42 +220,46 @@ resetButton.onclick = function() {
 }
 
 
-// ----- Learn Text -------
+// ----- Play -------
 const dialogue = {
-    0: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    1: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    2: "hi",
-    3: "pancake",
-    4: "waffle",
-    5: "qt",
+    0: "Welcome back! Perfect timing because a lot of my friends really need your help (and your math skills)! <br><br> This is my friend, Waffle, and he's having trouble going up this hill. <br><br> Can you help Waffle find the slope of this hill? <br><br> <small>Please input your answer as a decimal.</small>",
+    1: "hi",
+    2: "pancake",
+    3: "waffle",
+    4: "qt",
 
 }
-
-let index = 0;
-const learnText = document.getElementById("learn-text");
-learnText.innerHTML = dialogue[0];
+let answers = [0.5, -2, 1];
+let isCorrect = false;
+const playText = document.getElementById("play-text");
+playText.innerHTML = dialogue[0];
 nextButton = document.getElementById("next-button");
 backButton = document.getElementById("back-button");
 finishButton = document.getElementById("finish-button");
 finishButton.style.display = "none";
 backButton.style.display = "none";
-nextButton.onclick = function() {
 
+nextButton.onclick = function() {
     index += 1;
-    learnText.innerHTML = dialogue[index];
+    playText.innerHTML = dialogue[index];
+    updateGraph();
+    if (index == 1) {
+        backButton.style.display = "";
+    }
+
+    
     if (index == 5) {
         nextButton.style.display = "none";
         finishButton.style.display = "";
     }
 
-    if (index == 1) {
-        backButton.style.display = "";
-    }
+    
 }
 
 backButton.onclick = function() {
     index -= 1;
-    learnText.innerHTML = dialogue[index];
+    playText.innerHTML = dialogue[index];
+    updateGraph();
     if (index == 0) {
         backButton.style.display = "none";
     }
@@ -233,8 +269,3 @@ backButton.onclick = function() {
         finishButton.style.display = "none";
     }
 }
-
-
-
-
-
