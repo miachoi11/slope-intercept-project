@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Slope-Intercept</title>
+    <title>Learn</title>
     <link rel="icon" href="../img/math icon.png">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <h1>Slope-Intercept Form!</h1>
+    <div class="navigation-bar">
+        <h1>Slope-Intercept Form!</h1>
+    </div>
 
-    <h2 id="equation">y = <span id="m">m</span>x + <span id="b">b</span></h2>
-    <h2 id="equation">y = <span id="slope"></span>x + <span id="y-intercept"></span></h2>
+    <div class="learn float-parent">
+        <div class="graph-section float-child">
+                <h2 id="equation">y = <span id="m">m</span>x + <span id="b">b</span></h2>
+                <h2 id="equation">y = <span id="slope"></span>x + <span id="y-intercept"></span></h2>
+            <div class="canvas">
+                <canvas id="graph" width=500 height=500 style="border:2px solid #000000;"></canvas>
+            </div>
 
-    <div class="Row">
-        <div class="Col question-menu">Col1</div>
-        <div class="Col canvas">
-            <canvas id="graph" width=500 height=500 style="border:2px solid #000000;"></canvas>
+            <div class="controls">
+                <div class="sliders">
+                    <input type="range" class="slider" min="-5" max="5" value="0" step="0.5" id="slope-slider"/>
+                    <input type="range"  class="slider" min="-5" max="5" value="0" id="y-intercept-slider"/>
+                </div>
+
+                <div class="slider-labels">
+                    <p id="slope-slider-label">Slope: <span id="slope-label"></span></p>
+                    <p id="y-intercept-slider-label">Y-Intercept: <span id="y-intercept-label"></span></p>
+                </div>
+            </div>
+
+            <div class="reset-button">
+                <button id="reset-button">Reset!</button>
+            </div>
         </div>
-        <div class="Col practice-menu">Practice!</div>
-    </div>
 
-    <div class="sliders">
-        <input type="range" class="slider" min="-5" max="5" value="0" step="0.5" id="slope-slider"/>
-        <input type="range"  class="slider" min="-5" max="5" value="0" id="y-intercept-slider"/>
+        <div class="lesson-section float-child">
+            <div class="dialogue">
+                <p id="learn-text"></p>
+                <button id="next-button">Next</button>
+                <button id="back-button">Back</button>
+            </div>
+        </div>
     </div>
-
-    <div class="slider-labels">
-        <p id="slope-slider-label">Slope: <span id="slope-label"></span></p>
-        <p id="y-intercept-slider-label">Y-Intercept: <span id="y-intercept-label"></span></p>
-    </div>
-
-    <div class="reset-button">
-        <button id="reset-button">Reset!</button>
-    </div>
-
     <script src="../js/learn.js"></script>
 </body>
 </html>

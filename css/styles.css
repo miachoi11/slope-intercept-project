@@ -1,7 +1,12 @@
+body {
+    font-family: sans-serif;
+    margin: 0px;
+}
+
 h1 {
     text-align:center;
-    font-size: 30px;
-    padding-top: 20px;
+    font-size: 35px;
+    padding: 0;
     margin: 0 auto;
 }
 
@@ -11,42 +16,49 @@ h2 {
     margin: 0 auto;
 }
 
-body {
-    font-family: sans-serif;
-}
-
 div {
     margin: 0 auto;
     text-align: center;
     padding-top: 15px;
 }
 
-.Row {
-    display: table;
-    table-layout: fixed;
-    border-spacing: 10px;
-    padding: 0px;
+.navigation-bar {
+    background-color:rgba(200, 203, 210, 0.429);
+    padding: 10px;
 }
 
-.Col {
-    display: table-cell;
-    vertical-align: top;
-    padding: 0px;
+.index {
+    text-align: center;
 }
 
-.question-menu {
-    width: 150px;
-    background-color:rgb(233, 211, 203);
+.page-button {
+    display: block;
+    font-size: 30px;
+    text-align: center;
+    margin: 0 auto;
+    width: 400px;
+    height: 100px;
+    line-height: 100px;
+    text-decoration: none;
+    border-radius: 10px;
+    color: black;
 }
 
-.practice-menu {
-    font-weight: bold;
-    padding-top: 10px;
-    width: 150px;
-    background-color:rgb(233, 211, 203);
+.float-parent {
+    display: flex;
+    justify-content: center;
+    padding-top: 0px;
 }
 
+.float-child {
+    flex-basis: 400px;
+    margin: 10px;
+}
 
+.dialogue {
+    font-size: 20px;
+    padding-top: 105px;
+}
 
 .sliders {
     margin: 0px auto;
@@ -73,6 +85,53 @@ div {
     width: 500px;
     margin: 0px auto;
     text-align: center;
+}
+
+#learn-button {
+    background-color: rgb(38, 193, 175);
+}
+
+#play-button {
+    background-color: rgb(228, 107, 70);
+}
+
+a#learn-button:hover {
+    background:linear-gradient(to bottom, rgb(38, 193, 175) 10%, rgb(29, 154, 139) 100%);
+}
+
+a#play-button:hover {
+    background:linear-gradient(to bottom, rgb(228, 107, 70) 10%, rgb(183, 68, 33) 100%);
+}
+
+#next-button {
+    border: none;
+    text-decoration: none;
+    background-color:rgb(66, 196, 126);
+    color: white;
+    float: right;
+    margin-right: 20px;
+    height: 30px;
+    width: 50px;
+}
+
+#back-button {
+    border: none;
+    text-decoration: none;
+    background-color:rgb(209, 209, 209);
+    color: black;
+    float: right;
+    height: 30px;
+    width: 50px;
+}
+
+#next-button:hover {
+    cursor: pointer;
+    background:linear-gradient(to top, rgb(44, 133, 85) 10%, rgb(66, 196, 126) 100%);
+}
+
+#back-button:hover {
+    cursor: pointer;
+    background:linear-gradient(to top, rgb(135, 134, 134) 10%, rgb(209, 209, 209) 100%);
 }
 
 #slope, #m {
