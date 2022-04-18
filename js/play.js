@@ -175,6 +175,7 @@ function clearCanvas() {
 function updateGraph() {
     clearCanvas();
     images[index].onload = function() {
+        clearCanvas();
         drawBackground();
         drawGraph();
         drawLine();
@@ -208,6 +209,10 @@ yinterceptSlider.oninput = function() {
 let resetButton = document.getElementById("reset-button");
 
 resetButton.onclick = function() {
+    resetGraph();
+}
+
+function resetGraph() {
     slopeSlider.value = 0;
     slopeLabel.innerHTML = 0;
     slope.innerHTML = 0;
@@ -218,7 +223,6 @@ resetButton.onclick = function() {
     yVal = 0;
     updateGraph();
 }
-
 
 // ----- Play -------
 const dialogue = {
@@ -246,14 +250,19 @@ function checkAnswer() {
                  (index == 2 && inputValue == 1)) ? true : false;
 }
 
+// clears the answer and check elements
+function clearInputElements() {
+    answerInput.style.display = "none";
+    checkButton.style.display ="none";
+    answerInput.value = "";
+    answerInput.placeholder = "";
+}
+
 checkButton.onclick = function(){
     checkAnswer();
     if (isCorrect) {
         playText.innerHTML = "Correct!";
-        answerInput.style.display = "none";
-        checkButton.style.display ="none";
-        answerInput.value = "";
-        answerInput.placeholder = "";
+        clearInputElements();
     } else {
         answerInput.value = "";
         answerInput.placeholder = "Try again!";
@@ -267,16 +276,15 @@ nextButton.onclick = function() {
     answerInput.placeholder = "";
     answerInput.style.display = "";
     checkButton.style.display ="";
-    updateGraph();
+    resetGraph();
     if (index == 1) {
         backButton.style.display = "";
     }
 
     if (index == 3) {
-        nextButton.style.display = "none";
+        clearInputElements();
         finishButton.style.display = "";
-        answerInput.style.display = "none";
-        checkButton.style.display = "none";
+        nextButton.style.display="none";
     }
 }
 
@@ -286,7 +294,7 @@ backButton.onclick = function() {
     answerInput.placeholder = "";
     checkButton.style.display ="";
     playText.innerHTML = dialogue[index];
-    updateGraph();
+    resetGraph();
     if (index == 0) {
         backButton.style.display = "none";
     }

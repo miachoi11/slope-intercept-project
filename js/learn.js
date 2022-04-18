@@ -205,23 +205,27 @@ const dialogue = {
     6: "If you said (0, -2), you're correct! <br><br> You're now one step closer to becoming a true slope-intercept master. <br><br> Press \"Next\" to learn about slope!",
     7: "Remember how we said that in a linear relationship, when one variable changes, the other changes at a constant rate? <br><br> Slope is what represents this <b>rate of change</b>.<br><br> Press \"Next\" to learn more about the slope and how to find it.",
     8: "Slope tells us about the steepness and direction of a line. <br><br> The greater the absolute value of the slope, the steeper it gets. This is because when the slope is steeper, y changes at a faster rate as x changes. <br><br> A negative slope means that y decreases as x increases. <br><br> Play around with the slope slider and see these changes in action.",
-    9: "We can find slope by dividing the",
-    10: "qt",
-    11: "qt",
-    12: "qt",
-
+    9: "We can find slope by dividing the vertical change (rise) by the horizontal change (run) <b>Slope = rise over run.</b> <br><br> Here's an example for the line y = 2x",
+    10: "Given two points, <b>rise</b> is the vertical distance and<b> run</b> is the horizontal distance.<br><br> Make sure you pay attention to whether the slope is negative or positive!",
+    11: "<b>What if the line is vertical?</b> <br><br> A vertical line has a slope that is <em>undefined!</em> <br><br> This is because we cannot divide our rise by a run of zero.<br><br><br><br><br> Now that you know all about slope-intercept form, press \"Next\" for a challenge!",
+    12: "<b>Challenge!</b>",
 }
 
 let index = 0;
 const learnText = document.getElementById("learn-text");
+slopeExample = document.getElementById("slope-example");
+slopeExample.style.display = "none";
 learnText.innerHTML = dialogue[0];
 nextButton = document.getElementById("next-button");
 backButton = document.getElementById("back-button");
 finishButton = document.getElementById("finish-button");
 finishButton.style.display = "none";
 backButton.style.display = "none";
-nextButton.onclick = function() {
 
+challengeMenu = document.getElementById("challenge")
+challengeMenu.style.display = "none";
+
+nextButton.onclick = function() {
     index += 1;
     learnText.innerHTML = dialogue[index];
     if (index == 12) {
@@ -232,6 +236,18 @@ nextButton.onclick = function() {
     if (index == 1) {
         backButton.style.display = "";
     }
+
+    if (index == 9) {
+        slopeExample.style.display="";
+    }
+
+    if (index == 11) {
+        slopeExample.style.display="none";
+    }
+
+    if (index == 12) {
+        challengeMenu.style.display = "";
+    }
 }
 
 backButton.onclick = function() {
@@ -240,9 +256,81 @@ backButton.onclick = function() {
     if (index == 0) {
         backButton.style.display = "none";
     }
+
+    if (index == 8) {
+        slopeExample.style.display="none";
+    }
+
+    if (index == 10) {
+        slopeExample.style.display="";
+    }
     
     if (index == 11) {
         nextButton.style.display = "";
         finishButton.style.display = "none";
+        challengeMenu.style.display="none";
+        document.getElementById("challenge-1").placeholder = "";
+        document.getElementById("challenge-2").placeholder = "";
+        document.getElementById("challenge-3").placeholder = "";
     }
+}
+
+// Challenge
+let challenge1Ans = document.getElementById("challenge-1").valueAsNumber;
+let challenge2Ans = document.getElementById("challenge-2").valueAsNumber;
+let challenge3Ans = document.getElementById("challenge-3").valueAsNumber;
+
+let isCorrect1 = false;
+let isCorrect2 = false;
+let isCorrect3 = false;
+
+function getAnswerValues(){
+    challenge1Ans = document.getElementById("challenge-1").valueAsNumber;
+    challenge2Ans = document.getElementById("challenge-2").valueAsNumber;
+    challenge3Ans = document.getElementById("challenge-3").valueAsNumber;
+} 
+
+function checkAnswer() {
+    getAnswerValues();
+    isCorrect1 = challenge1Ans == 400 ? true : false;
+    isCorrect2 = challenge2Ans == -2 ? true : false;
+    isCorrect3 = challenge3Ans == -110 ? true : false;
+}
+
+let checkButton1 = document.getElementById("check-answer-1");
+let checkButton2 = document.getElementById("check-answer-2");
+let checkButton3 = document.getElementById("check-answer-3");
+
+
+checkButton1.onclick = function(){
+    checkAnswer();
+    if (isCorrect1) {
+        document.getElementById("challenge-1").placeholder = "Correct!";
+    } else {
+        document.getElementById("challenge-1").value = "";
+        document.getElementById("challenge-1").placeholder = "Try again!";
+    }
+    document.getElementById("challenge-1").value = "";
+}
+
+checkButton2.onclick = function(){
+    checkAnswer();
+    if (isCorrect2) {
+        document.getElementById("challenge-2").placeholder = "Correct!";
+    } else {
+        document.getElementById("challenge-2").value = "";
+        document.getElementById("challenge-2").placeholder = "Try again!";
+    }
+    document.getElementById("challenge-2").value = "";
+}
+
+checkButton3.onclick = function(){
+    checkAnswer();
+    if (isCorrect3) {
+        document.getElementById("challenge-3").placeholder = "Correct!";
+    } else {
+        document.getElementById("challenge-3").value = "";
+        document.getElementById("challenge-3").placeholder = "Try again!";
+    }
+    document.getElementById("challenge-3").value = "";
 }
